@@ -1,3 +1,4 @@
+#todo-me set subset size limit to [1, test_instance.kmax]
 import numpy as np
 import copy
 import random
