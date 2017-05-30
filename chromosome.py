@@ -22,8 +22,12 @@ class Chromosome(object):
     def recalc_fitness(self):
         self.subsets_idx = np.where(self.subsets_bitarr == 1)[0]
         self.subsets_chosen = [self.SUBSETS[i] for i in self.subsets_idx]
-        self.elements_fitness = len(set.union(*self.SUBSETS) - set.union(*self.subsets_chosen))
-        self.subsets_fitness = len(self.subsets_chosen)
+        if len(self.subsets_chosen)==0:
+            self.elements_fitness = len(set.union(*self.SUBSETS))
+            self.subsets_fitness = len(self.subsets_chosen)
+        else:
+            self.elements_fitness = len(set.union(*self.SUBSETS) - set.union(*self.subsets_chosen))
+            self.subsets_fitness = len(self.subsets_chosen)
 
     def dominates(self, chromosome):
         # check if both fitness functions are <= chromosome fitnesses
@@ -42,7 +46,7 @@ class Chromosome(object):
         return np.count_nonzero(self.subsets_bitarr != chromosome.subsets_bitarr)
 
     def mutate(self):
-        mut_idx = random.randint(0, len(self.subsets_bitarr))
+        mut_idx = random.randint(0, len(self.subsets_bitarr)-1)
         self.subsets_bitarr[mut_idx] = int(not self.subsets_bitarr[mut_idx])
 
     def crossover(self, second_parent):
@@ -52,7 +56,6 @@ class Chromosome(object):
         second_desc = copy.deepcopy(second_parent)
 
         cut_point = random.randint(0, len(self.subsets_bitarr))
-        print cut_point
         for i in xrange(cut_point):
             first_desc.subsets_bitarr[i], second_desc.subsets_bitarr[i] = \
                 second_desc.subsets_bitarr[i], first_desc.subsets_bitarr[i]

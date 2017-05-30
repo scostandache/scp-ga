@@ -4,7 +4,7 @@ from chromosome import *
 class Population(object):
     # class to represent the population
 
-    def __init(self, pop_size, test_instance):
+    def __init__(self, pop_size, test_instance):
         """
         
         :param pop_size: number of chromosomes in population 

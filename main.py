@@ -3,13 +3,15 @@ import numpy as np
 import copy
 from chromosome import *
 from CoverSet import *
+from GA import *
+from niche import *
 
 n = 1000
 m = 300 #size of set
 l = 5 #size of list of subsets
 
-cs = CoverSet(100,30,5)
+test_set = CoverSet(10000,300,200,10)
 
-a=[0,0,1,1,0]
-a[2] = int(not a[2])
-print a
+galg = GA()
+galg.solve(test_set, 150, deterministic_crowding, 20)
+
