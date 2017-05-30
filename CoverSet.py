@@ -8,6 +8,7 @@ class CoverSet(object):
         :param n_range: max value of numbers in set
         :param set_size: number of elements in set
         :param n_subsets: number of subsets
+        :param max_k: max number of subsets a chromosome can have
         """
         self.K = max_k
         possible_numbers = range(n_range)

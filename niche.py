@@ -1,4 +1,3 @@
-# todo-me implement Deterministic Crowding
 import random
 import copy
 
